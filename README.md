@@ -1,5 +1,6 @@
 # RedStat
-
+## Initial OS flash and headless configuration
+---
 A new user interface for the open-source potentiostat [dstat](https://doi.org/10.1371/journal.pone.0140349).
 
 The user interface is written in Javascript using node-red. This repository consists of an installation [script](https://raw.githubusercontent.com/CarlosSanchez01/RedStat/main/script.sh) designed to be run in a raspberry pi.
@@ -22,6 +23,8 @@ Then, 2 files need to be created in the boot partition inside the sd card to all
 
 After this, the raspberry pi can be turned on and it will connect to the wifi network. However, it is important to consider that RPi3b+ only uses 2.4GHz which means that it makes sense to have an access point router like [Tplink nano](https://www.tp-link.com/us/home-networking/wifi-router/tl-wr802n/) to facilitate connection of all the raspberry pis that you want to use on your setup.
 
+## Running the script
+---
 Then you can connect to your Raspberry pi
 ```bash
 user@yourclient:~$ ssh pi@<Ip address of your raspberry pi>
@@ -41,4 +44,12 @@ This will first set new hostname for your raspberry pi, change the default passw
 
 Facilitating the installation process and allowing easy handling of data in a client-server infrastructure.
 
+## Importing flows into Node-red
+---
 Now you can open your node-red and paste the flows.
+
+## Configuring Grafana
+---
+
+## Final checks
+---
