@@ -139,12 +139,11 @@ elif [ $input == "all" ]
 	sudo systemctl enable grafana-server
 	sudo systemctl start grafana-server
 
-	printf "installing nodered...\n"
-	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
 	sudo -u pi bash <(curl -sL $web)
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
+    sudo mkdir .node-red
     cd .node-red
     sudo -u pi npm install node-red-node-pi-gpio
 	sudo -u pi npm install node-red-node-serialport
@@ -152,7 +151,9 @@ elif [ $input == "all" ]
 	sudo -u pi npm install node-red-dashboard
 	sudo -u pi npm install node-red-contrib-influxdb
     cd ..
-    printf "setting nodered as a service...\n"
+    printf "\n"
+	printf "setting nodered as a service...\n"
+	# node-red-pi --max-old-space-size=256
 	sudo systemctl enable nodered.service
 
 elif [ $input == "influxdb" ]
@@ -183,11 +184,11 @@ elif [ $input == "nodered" ]
     then
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
-    mkdir .node-red
 	sudo -u pi bash <(curl -sL $web)
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
+    sudo mkdir .node-red
     cd .node-red
     sudo -u pi npm install node-red-node-pi-gpio
 	sudo -u pi npm install node-red-node-serialport
