@@ -59,7 +59,7 @@ if [ $response == "y" ]
 
     if [ $response == "y" ]
         then
-            sudo -u passwd
+            sudo -u pi passwd
             printf "You just changed your password\n"
     else 
         printf "You did not change your password\n"
