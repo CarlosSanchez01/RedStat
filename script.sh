@@ -183,6 +183,7 @@ elif [ $input == "nodered" ]
     then
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
+    mkdir .node-red
 	sudo -u pi bash <(curl -sL $web)
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
@@ -216,7 +217,7 @@ printf "Happy work\n\n"
 
 for i in {5..1}
 do 
-    printf -n "$i\n"
+    printf "$i\n"
     sleep 1
 done
 sudo reboot
