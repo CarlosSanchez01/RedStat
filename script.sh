@@ -184,8 +184,9 @@ elif [ $input == "nodered" ]
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
     wget $web -O .nodered.sh
-    sed i '/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-random@latest node-red-node-ping@latest node-red-contrib-play-audio@latest node-red-node-smooth@latest node-red-node-serialport@latest"/c\EXTRANODES="node-red-node-pi-gpio@latest  node-red-node-serialport@latest node-red-node-ui-table node-red-node-ui-table node-red-node-ui-table node-red-dashboard node-red-contrib-influxdb"/c\' .nodered.sh
-    sudo  bash .nodered.sh --confirm-install
+    printf "I substitute the extranodes in the installation script to match the requirements of our dstat flow...\n"
+    sed -i 's/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-random@latest node-red-node-ping@latest node-red-contrib-play-audio@latest node-red-node-smooth@latest node-red-node-serialport@latest"/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-serialport@latest node-red-node-ui-table node-red-dashboard node-red-contrib-influxdb"/' .nodered.sh
+    sudo  bash .nodered.sh --confirm-root --confirm-install --confirm-pi
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
