@@ -117,7 +117,7 @@ elif [ $input == "all" ]
 
 	printf "Installing all...\n"
 	printf "installing pre-requirements...\n"
-	sudo apt install build-essential git -y
+	sudo apt install build-essential git
 
 	printf "Installing influxdb...\n"
 	wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
@@ -145,11 +145,13 @@ elif [ $input == "all" ]
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
+    cd .node-red
     sudo npm install node-red-node-pi-gpio
 	sudo npm install node-red-node-serialport
 	sudo npm install node-red-node-ui-table
 	sudo npm install node-red-dashboard
 	sudo npm install node-red-contrib-influxdb
+    cd ..
     printf "setting nodered as a service...\n"
 	sudo systemctl enable nodered.service
 
@@ -184,11 +186,13 @@ elif [ $input == "nodered" ]
 	bash <(curl -sL $web)
 	echo "Installing missing modules..."
     # sudo npm init	
-	sudo npm install node-red-node-pi-gpio
+	cd .node-red
+    sudo npm install node-red-node-pi-gpio
 	sudo npm install node-red-node-serialport
 	sudo npm install node-red-node-ui-table
 	sudo npm install node-red-dashboard
 	sudo npm install node-red-contrib-influxdb
+    cd ..
     printf "\n"
 	printf "setting nodered as a service...\n"
 	# node-red-pi --max-old-space-size=256
