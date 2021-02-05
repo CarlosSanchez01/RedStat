@@ -141,7 +141,7 @@ elif [ $input == "all" ]
 
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
-	sudo -u pi bash <(curl -sL $web)
+	sudo -u pi bash <(curl -sL $web) --confirm-install
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
@@ -183,18 +183,12 @@ elif [ $input == "nodered" ]
     then
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
-    mkdir .node-red
-	sudo -u pi bash <(curl -sL $web)
+    wget $web -O .nodered.sh
+    sed i '/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-random@latest node-red-node-ping@latest node-red-contrib-play-audio@latest node-red-node-smooth@latest node-red-node-serialport@latest"/c\EXTRANODES="node-red-node-pi-gpio@latest  node-red-node-serialport@latest node-red-node-ui-table node-red-node-ui-table node-red-node-ui-table node-red-dashboard node-red-contrib-influxdb"/c\' .nodered.sh
+    sudo  bash .nodered.sh --confirm-install
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
-    cd .node-red
-    sudo -u pi npm install node-red-node-pi-gpio
-	sudo -u pi npm install node-red-node-serialport
-	sudo -u pi npm install node-red-node-ui-table
-	sudo -u pi npm install node-red-dashboard
-	sudo -u pi npm install node-red-contrib-influxdb
-    cd ..
     printf "\n"
 	printf "setting nodered as a service...\n"
 	# node-red-pi --max-old-space-size=256
