@@ -10,11 +10,11 @@ Initially the raspberry pi will require to flash the operative system in the sd 
 Then, 2 files need to be created in the boot partition inside the sd card to allow [headless](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md) raspberry pi connection:
 
 1. file called **ssh** file to allow ssh connection at first boot
-2. another file, this one called **wpa_supplicant.conf** with the contents of the wifi connection of your router. The format of this file is the following:
+2. another file, this one called **wpa_supplicant.conf** with the contents of the wifi connection of your router ([country_code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements), ssid and password). The format of this file is the following:
 
         ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
         update_config=1
-        country="country code"
+        country=country_code
 
         network={
             ssid="your network"

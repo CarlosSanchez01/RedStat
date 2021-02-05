@@ -141,16 +141,16 @@ elif [ $input == "all" ]
 
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
-	bash <(curl -sL $web)
+	sudo -u pi bash <(curl -sL $web)
 	# node-red-pi --max-old-space-size=256
 	printf "Installing missing modules...\n"
     # sudo npm init
     cd .node-red
-    sudo npm install node-red-node-pi-gpio
-	sudo npm install node-red-node-serialport
-	sudo npm install node-red-node-ui-table
-	sudo npm install node-red-dashboard
-	sudo npm install node-red-contrib-influxdb
+    sudo -u pi npm install node-red-node-pi-gpio
+	sudo -u pi npm install node-red-node-serialport
+	sudo -u pi npm install node-red-node-ui-table
+	sudo -u pi npm install node-red-dashboard
+	sudo -u pi npm install node-red-contrib-influxdb
     cd ..
     printf "setting nodered as a service...\n"
 	sudo systemctl enable nodered.service
@@ -183,15 +183,16 @@ elif [ $input == "nodered" ]
     then
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
-	bash <(curl -sL $web)
-	echo "Installing missing modules..."
-    # sudo npm init	
-	cd .node-red
-    sudo npm install node-red-node-pi-gpio
-	sudo npm install node-red-node-serialport
-	sudo npm install node-red-node-ui-table
-	sudo npm install node-red-dashboard
-	sudo npm install node-red-contrib-influxdb
+	sudo -u pi bash <(curl -sL $web)
+	# node-red-pi --max-old-space-size=256
+	printf "Installing missing modules...\n"
+    # sudo npm init
+    cd .node-red
+    sudo -u pi npm install node-red-node-pi-gpio
+	sudo -u pi npm install node-red-node-serialport
+	sudo -u pi npm install node-red-node-ui-table
+	sudo -u pi npm install node-red-dashboard
+	sudo -u pi npm install node-red-contrib-influxdb
     cd ..
     printf "\n"
 	printf "setting nodered as a service...\n"
@@ -207,5 +208,14 @@ fi
 ###############################################################################
 ###############################################################################
 printf "\n"
-printf "Now you can open nodered in a web browser in your network at <'raspberryPi_hostname':1880?>\n"
+printf "We are gonna reboot, after this open a web browser in your network \n"
+printf "at <'raspberryPi_hostname':1880> to see your node-red instance \n"
+printf "check for grafana in <'raspberryPi_hostname':3000> \n\n"
 printf "Happy work\n\n"
+
+for i in {5..1}
+do 
+    printf -n "$i\n"
+    sleep 1
+done
+sudo reboot
