@@ -208,7 +208,8 @@ fi
 ###############################################################################
 ###############################################################################
 printf "\n"
-printf "We are gonna reboot, after this open a web browser in your network \n"
+printf "We are gonna reboot now!"
+printf "After reboot open a web browser in your network \n"
 printf "at <'raspberryPi_hostname':1880> to see your node-red instance \n"
 printf "check for grafana in <'raspberryPi_hostname':3000> \n\n"
 printf "Happy work\n\n"
