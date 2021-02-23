@@ -139,16 +139,20 @@ elif [ $input == "all" ]
 	sudo systemctl enable grafana-server
 	sudo systemctl start grafana-server
 
+
 	printf "installing nodered...\n"
 	web=https://raw.githubusercontent.com/CarlosSanchez01/RedStat/script-for-nodered-changed-with-sed/.nodered.sh
     wget $web -O .nodered.sh
     printf "I substitute the extranodes in the installation script to match the requirements of our dstat flow...\n"
     sed -i 's/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-random@latest node-red-node-ping@latest node-red-contrib-play-audio@latest node-red-node-smooth@latest node-red-node-serialport@latest"/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-serialport@latest node-red-node-ui-table node-red-dashboard node-red-contrib-influxdb"/' .nodered.sh
     sudo  bash .nodered.sh --confirm-root --confirm-install --confirm-pi
+
 	# node-red-pi --max-old-space-size=256
 	# printf "Installing missing modules...\n"
     # sudo npm init
+
     printf "setting nodered as a service...\n"
+
 	sudo systemctl enable nodered.service
 
 elif [ $input == "influxdb" ]
@@ -178,14 +182,17 @@ elif [ $input == "grafana" ]
 elif [ $input == "nodered" ]
     then
 	printf "installing nodered...\n"
+
 	web=https://raw.githubusercontent.com/CarlosSanchez01/RedStat/script-for-nodered-changed-with-sed/.nodered.sh
     wget $web -O .nodered.sh
     printf "I substitute the extranodes in the installation script to match the requirements of our dstat flow...\n"
     sed -i 's/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-random@latest node-red-node-ping@latest node-red-contrib-play-audio@latest node-red-node-smooth@latest node-red-node-serialport@latest"/EXTRANODES="node-red-node-pi-gpio@latest node-red-node-serialport@latest node-red-node-ui-table node-red-dashboard node-red-contrib-influxdb"/' .nodered.sh
     sudo  bash .nodered.sh --confirm-root --confirm-install --confirm-pi
+
 	# node-red-pi --max-old-space-size=256
 	# printf "Installing missing modules...\n"
     # sudo npm init
+
     printf "\n"
 	printf "setting nodered as a service...\n"
 	# node-red-pi --max-old-space-size=256
